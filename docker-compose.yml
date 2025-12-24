@@ -11,6 +11,8 @@ services:
       - ./server:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - redis
 
   client:
     build:
@@ -26,3 +28,15 @@ services:
       - "5173:5173"
     environment:
       - NODE_ENV=development
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+
