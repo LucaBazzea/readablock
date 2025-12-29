@@ -1,8 +1,12 @@
 import os
 
+from django.conf import settings
+
 from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
 from textblob import TextBlob
+import deepl
+
 
 def get_total_sentence_count(text: str) -> int:
     blob = TextBlob(text)
@@ -42,3 +46,24 @@ def convert_epub_to_str():
     full_text = "\n".join(text)
 
     return full_text
+
+def translate(text: str, source: str | None, target: str):
+    """
+    Translation using DeepL API
+ 
+    Parameters:
+    - text: The text to translate
+    - source: Source language code (optional, auto-detect if not provided)
+    - target: Target language code (default: EN-GB)
+ 
+    Returns translated text with language information
+    """
+    translator = deepl.Translator(settings.DEEPL_API_KEY)
+
+    translated = translator.translate_text(
+        text,
+        source_lang=source,
+        target_lang=target
+    )
+
+    return translated

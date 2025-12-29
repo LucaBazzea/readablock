@@ -1,4 +1,5 @@
 from ninja import Schema
+from typing import Optional
 
 
 class BookSchema(Schema):
@@ -6,3 +7,9 @@ class BookSchema(Schema):
     #character_limit: int
     #sentence_last_read: int = 0
     page_turn: str | None = None # "next" | "previous"
+
+
+class TranslationSchema(Schema):
+    text: str
+    source: Optional[str] = None
+    target: str = "EN-GB"

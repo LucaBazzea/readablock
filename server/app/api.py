@@ -2,6 +2,7 @@ from django.core.cache import cache
 
 from ninja import NinjaAPI
 from ninja.responses import Response
+import deepl
 
 from app import schema, services
 
@@ -39,3 +40,25 @@ def read(request, data: schema.BookSchema):
         },
         status=200
     )
+
+@api.post("/translate/")
+def translate(request, data: schema.TranslationSchema):
+    try:
+        translated = services.translate(data.text, data.source, data.target)
+ 
+        return Response(
+            {"translated": str(translated)},
+            status=200
+        )
+
+    except deepl.DeepLException as error:
+        return Response(
+            {"error": f"DeepL API error: {str(error)}"},
+            status=400
+        )
+
+    except Exception as error:
+        return Response(
+            {"error": f"Translation error: {str(error)}"},
+            status=500
+        )
