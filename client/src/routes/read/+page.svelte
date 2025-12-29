@@ -229,10 +229,11 @@
 									</div>
 
 									{#if translations[index]}
-										<div class="mt-2 p-2 bg-base-200 rounded-lg">
+										<div
+											class="mt-2 p-2 bg-primary rounded-lg text-accent-content shadow-xl border-2 border-accent-focus"
+										>
 											<div class="flex items-start justify-between">
 												<div class="flex-1">
-													<p class="text-sm font-semibold text-primary">Translation:</p>
 													<p class="text-sm">{translations[index].translated}</p>
 												</div>
 												<button
@@ -287,7 +288,7 @@
 	<!-- Word Translation Dropdown -->
 	{#if wordDropdown.visible}
 		<div
-			class="fixed z-50 bg-accent text-accent-content rounded-lg shadow-xl border-2 border-accent-focus px-3 py-2 min-w-[120px] max-w-[300px]"
+			class="fixed z-50 bg-primary text-accent-content rounded-lg shadow-xl border-2 border-accent-focus px-3 py-2 min-w-[120px] max-w-[300px]"
 			style="left: {wordDropdown.x}px; top: {wordDropdown.y}px;"
 			on:click={(e) => e.stopPropagation()}
 		>
