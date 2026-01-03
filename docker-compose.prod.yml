@@ -11,8 +11,8 @@ services:
       - ./server:/app
       - static_volume:/app/staticfiles
       - media_volume:/app/media
-    expose:
-      - "8000"
+    ports:
+      - "127.0.0.1:8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
       - DEBUG=False
@@ -25,15 +25,15 @@ services:
       context: ./client
       dockerfile: Dockerfile.prod
     container_name: client
-    expose:
-      - "3000"
+    ports:
+      - "127.0.0.1:5173:5173"
     restart: unless-stopped
 
   redis:
     image: redis:alpine
     container_name: redis
-    expose:
-      - "6379"
+    ports:
+      - "127.0.0.1:6380:6379"
     volumes:
       - redis_data:/data
     restart: unless-stopped
