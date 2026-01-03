@@ -163,8 +163,7 @@
 					builds fluency.
 				</p>
 				<div class="hero-cta">
-					<button class="btn btn-primary">Start Reading Free</button>
-					<button class="btn btn-outline">Watch Demo</button>
+					<a href="/read" class="btn btn-primary">Start Reading</a>
 				</div>
 			</div>
 
