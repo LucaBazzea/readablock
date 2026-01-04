@@ -44,7 +44,7 @@ def read(request, data: schema.BookSchema):
 @api.post("/translate/")
 def translate(request, data: schema.TranslationSchema):
     try:
-        translated = services.translate(data.text, data.source, data.target)
+        translated = services.translate(data.text, data.source, data.target, data.context)
  
         return Response(
             {"translated": translated.text},

@@ -55,16 +55,23 @@
 		}
 	}
 
-	async function translateText(text) {
+	async function translateText(text, context = null) {
 		try {
+			const requestBody = {
+				text: text,
+				source: sourceLang,
+				target: targetLang
+			};
+
+			// Add context if provided
+			if (context) {
+				requestBody.context = context;
+			}
+
 			const response = await fetch(`${baseURL}/app/translate/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					text: text,
-					source: sourceLang,
-					target: targetLang
-				})
+				body: JSON.stringify(requestBody)
 			});
 
 			if (!response.ok) {
@@ -100,7 +107,7 @@
 		}
 	}
 
-	async function handleWordClick(event, word) {
+	async function handleWordClick(event, word, sentenceContext) {
 		event.stopPropagation();
 
 		const cleanWord = word.trim();
@@ -120,7 +127,7 @@
 		};
 
 		try {
-			const translated = await translateText(cleanWord);
+			const translated = await translateText(cleanWord, sentenceContext);
 			console.log('Translated word:', translated); // Debug log
 			wordDropdown = {
 				...wordDropdown,
@@ -218,7 +225,7 @@
 											{#if part.trim().length > 0}
 												<button
 													class="btn btn-ghost btn-xs normal-case p-0 m-0.5 hover:bg-base-300"
-													on:click={(e) => handleWordClick(e, part)}
+													on:click={(e) => handleWordClick(e, part, sentence)}
 												>
 													{part}
 												</button>

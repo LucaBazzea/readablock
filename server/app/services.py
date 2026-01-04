@@ -47,7 +47,7 @@ def convert_epub_to_str():
 
     return full_text
 
-def translate(text: str, source: str | None, target: str):
+def translate(text: str, source: str | None, target: str, context: str | None):
     """
     Translation using DeepL API
  
@@ -55,6 +55,7 @@ def translate(text: str, source: str | None, target: str):
     - text: The text to translate
     - source: Source language code (optional, auto-detect if not provided)
     - target: Target language code (default: EN-GB)
+    - context: Text related to the word to be translated, in the same language (optional)
  
     Returns translated text with language information
     """
@@ -63,7 +64,8 @@ def translate(text: str, source: str | None, target: str):
     translated = translator.translate_text(
         text,
         source_lang=source,
-        target_lang=target
+        target_lang=target,
+        context=context
     )
 
     return translated
