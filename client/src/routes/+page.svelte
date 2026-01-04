@@ -360,12 +360,11 @@
 					<h4>Product</h4>
 					<a href="#features">Features</a>
 					<a href="#pricing">Pricing</a>
-					<a href="#books">Book Library</a>
 					<a href="#languages">Languages</a>
 				</div>
 				<div class="footer-column">
 					<h4>Resources</h4>
-					<a href="#blog">Blog</a>
+					<a href="#github">GitHub</a>
 					<a href="#guides">Learning Guides</a>
 					<a href="#research">Research</a>
 					<a href="#faq">FAQ</a>
